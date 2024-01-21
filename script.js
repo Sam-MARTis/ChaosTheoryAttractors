@@ -31,9 +31,14 @@ a = Promise.resolve()
 //Functions
 
 
-
+const clearScreen = () => {
+    c.clearRect(0, 0, canvas.width, canvas.height);
+}
 const butClick = () => {
     butPushed = 1;
+}
+const reloadScreen = () => {
+    location.reload();
 }
 
 

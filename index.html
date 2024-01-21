@@ -17,12 +17,21 @@
             left: 100px;
             top: 100px;
             z-index: 100;
-            background-color: blue;
+            background-color:beige;
         }
     </style>
 </head>
 <body>
-    <button type="button" onclick="butClick()">Speed up</button>
+    <div>
+        <button type="button" onclick="butClick()">Speed up</button>
+        <button type="button" onclick="clearScreen()">Clear </button>
+        <button type="button" onclick="reloadScreen()">New</button>
+        <span> Attractors: </span>
+        <button type="button" onclick="chen()">Clear </button>
+        <button type="button" onclick="lorentz()">New</button>
+
+    
+    </div>
     <canvas id="firstCanvas">
     </canvas>
     <script src="script.js"></script>
