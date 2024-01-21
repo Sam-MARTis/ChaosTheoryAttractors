@@ -3,7 +3,7 @@
 var unitVel = 100; //used to normalize pen velocity. normalvel = penvel/unitVel
 var ff = 0;  //Boolean. fast forward
 var timeDelay = 1; //How quickly it draws lines
-
+var endMove = 0;
 // Getting html5 canvas ready 
 var canvas = document.getElementById('firstCanvas');
 console.log(canvas);
@@ -52,7 +52,9 @@ const ffBut = () => {
     ff = 1; //Command to fastforward
 }
 const reloadScreen = () => {
+    endMove = 1;
     location.reload(); //reloads page when you press new
+    clearScreen();
 }
 const speedUp = () => {
     // timeDelay = 1;
@@ -126,6 +128,11 @@ var dzdt=(x,y,z) => {return 0;}
 
 const proceed = (k) => {
 for(let i=0; i<k; i++){
+    if(endMove ==1){
+            endMove = 0;
+            move(0,0)
+            break;
+        }
     
     a = a.then(
             () => {
@@ -162,6 +169,7 @@ for(let i=0; i<k; i++){
                 );
             }
         );
+        
     
 }
 }
