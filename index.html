@@ -10,6 +10,7 @@
         }
         #firstCanvas{
             border: 1px solid black;
+            background-color: black;
 
 
         }
@@ -26,21 +27,27 @@
             margin-left: 20px;
             color:darkblue;
         }
+        #mainContainer{
+            background-color: black;
+        }
+
     </style>
 </head>
 <body>
-    <div id = 'HeaderDiv'>
-        <button class= 'myBut' type="button" onclick="ffBut()">Fast Forward</button>
-        <button class= 'myBut' type="button" onclick="speedUp()">Speed up</button>
-        <button class= 'myBut' type="button" onclick="normalSpeed()">Normal</button>
-        <button class= 'myBut' type="button" onclick="slowDown()">Slow down</button>
-        <button class= 'myBut' type="button" onclick="clearScreen()">Clear </button>
-        <button class= 'myBut' type="button" onclick="reloadScreen()">New</button>
+    <div id = 'mainContainer'>
+    <div id = 'headerDiv'>
+        <button class= 'myBut' id="but1" type="button">Fast Forward</button>
+        <button class= 'myBut' id="but2" type="button" >Speed up</button>
+        <button class= 'myBut' id="but3" type="button" >Normal</button>
+        <button class= 'myBut' id="but4" type="button" >Slow down</button>
+        <button class= 'myBut' id="but5" type="button" >Clear </button>
+        <button class= 'myBut' id="but6" type="button" >New</button>
         <span id="labelSpan"> Attractors: </span>
-        <button class= 'myBut' type="button" onclick="chen()">Chen </button>
-        <button class= 'myBut' type="button" onclick="lorentz()">Lorentz</button>
+        <button class= 'myBut' id="but7" type="button" >Chen </button>
+        <button class= 'myBut' id="but8" type="button" >Lorentz</button>
 
     
+    </div>
     </div>
     <canvas id="firstCanvas">
     </canvas>

@@ -74,6 +74,7 @@ var normalizeY = (y) =>{
     return 0;
 }
 
+
 c.beginPath();
 
 
@@ -176,7 +177,7 @@ const lorentz = () =>{
         return (window.innerWidth/2 + 30*scaleFactor*x);
     }
     normalizeY = (y) =>{
-        return (window.innerHeight/2 - 18*scaleFactor*(y-30*scaleFactor));
+        return (window.innerHeight/2 - 18*scaleFactor*(y-25*scaleFactor));
     }
     prev_pos = {x:normalizeX(y), y:normalizeY(z)};
     dxdt=(x,y,z) => {return 10*(y-x);}
@@ -206,3 +207,13 @@ const chen = () => {
     proceed(Math.round(200000*(scaleFactor**0.2)));
 
 }
+
+
+document.getElementById('but1').addEventListener('click', ffBut);
+document.getElementById('but2').addEventListener('click', speedUp);
+document.getElementById('but3').addEventListener('click', normalSpeed);
+document.getElementById('but4').addEventListener('click', slowDown);
+document.getElementById('but5').addEventListener('click', clearScreen);
+document.getElementById('but6').addEventListener('click', reloadScreen);
+document.getElementById('but7').addEventListener('click', chen);
+document.getElementById('but8').addEventListener('click', lorentz);
