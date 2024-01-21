@@ -21,7 +21,7 @@ var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
 
 
 //More variables. r, g, b are declared to make a gradient depending on pen velocity
-
+var state = 2;
 var std_dt = 0.005; //Standard time-step
 var count = 0;
 var x=-7.13;
@@ -128,20 +128,14 @@ var dzdt=(x,y,z) => {return 0;}
 
 
 //Main function
-const proceed = (k, num) => {
-    for(let i=0; i<k; i++){
-        if(endMove ==1){
-                endMove = 0;
-                move(0,0);
-                break;
-            }
-        
+const proceed = (k) => {
+    for(let i=0; i<k; i++){       
         a = a.then(
                 () => {
-                    if(num == 0){
+                    if(state == 0){
                         command(move, normalizeX(x), normalizeY(z), {r:r, g:g, b:b});
                     }
-                    else{
+                    if(state ==1){
                         command(move,(normalizeX(y)*1.86 - normalizeX(x)*0.86), normalizeY(z), {r:r, g:g, b:b});
                     }
                 }
@@ -191,6 +185,7 @@ const lorenz = () =>{
     x=-7.13;
     y=-7.11;
     z=25.41;
+    state=0;
 
     
     std_dt = 0.003;
@@ -209,13 +204,14 @@ const lorenz = () =>{
     dydt=(x,y,z)=> {return x*(28-z)-y;}
     dzdt=(x,y,z) => {return x*y-8*z/3;}
 
-    proceed(Math.round(600000*(scaleFactor**0.2)), 0); //Calls the main function with above delcared conditions.
+    proceed(Math.round(600000*(scaleFactor**0.2))); //Calls the main function with above delcared conditions.
 }
 const chen = () => {
     //Starting positions for chen attractor
     x=1.960;
     y=2.04;
     z=12.51;
+    state=0;
 
 
     std_dt = 0.0004; //Chen attractor is more sensitive
@@ -237,16 +233,18 @@ const chen = () => {
     dzdt=(x,y,z) => {return 10*x*y  - 30*z;}
 
 
-    proceed(Math.round(200000*(scaleFactor**0.2)), 0); //Calls the main function with above delcared conditions.
+    proceed(Math.round(200000*(scaleFactor**0.2))); //Calls the main function with above delcared conditions.
 
 }
 const halvorsen = () => {
+    console.log("Doing halvorsen...");
     // x= -5.48;
     // y= -4.51;
     // z= 1.04;
     x = -1.48;
     y = -1.51;
     z = 2.04;
+    state = 1;
 
 
     std_dt = 0.001; //Chen attractor is more sensitive
@@ -266,7 +264,7 @@ const halvorsen = () => {
     dydt=(x,y,z)=> {return -(alpha*y) - (4*z) - (4*x) - (z**2);}
     dzdt=(x,y,z) => {return -(alpha*z) - (4*x) - (4*y) - (x**2);}
 
-    proceed(Math.round(800000*(scaleFactor**0.2)), 1);
+    proceed(Math.round(800000*(scaleFactor**0.2)));
 }
 //Controls functionality of buttons
 
