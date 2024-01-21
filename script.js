@@ -1,18 +1,27 @@
+//Declaring some variables and parameters
 
+var unitVel = 100; //used to normalize pen velocity. normalvel = penvel/unitVel
+var ff = 0;  //Boolean. fast forward
+var timeDelay = 1; //How quickly it draws lines
 
-var unitVel = 100; 
-var ff = 0;
-var timeDelay = 1;
+// Getting html5 canvas ready 
 var canvas = document.getElementById('firstCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-// canvas.height = 1000 * devicePixelRatio;
 console.log(canvas.height, canvas.width);
 var c = canvas.getContext('2d');
 c.strokeStyle = 'rgb(200, 0,0)';
 c.lineWidth= 1;
+
+
+
+// The beloe line is what resizes the graph to fit screensize in all devices.
 var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
-var std_dt = 0.005;
+
+
+//More variables. r, g, b are declared to make a gradient depending on pen velocity
+
+var std_dt = 0.005; //Standard time-step
 var count = 0;
 var x=-7.13;
 var y=-7.11;
@@ -20,8 +29,9 @@ var z=25.41;
 var b = 0;
 var g = 0;
 var r = 0;
-var dt = 0.005;
-a = Promise.resolve();
+var dt = 0.005;  //Actual used time-step
+a = Promise.resolve();  //Starts with a resolved promise. We do .then to draw the next movement of the pen. 
+// Promises were painful to learn since I had never used them before.
 
 
 
@@ -29,23 +39,23 @@ a = Promise.resolve();
 
 
 
-//Functions
+// Button click functions
 
 
 const clearScreen = () => {
     c.clearRect(0, 0, canvas.width, canvas.height);
 }
 const ffBut = () => {
-    dt = std_dt/5;
+    dt = std_dt/5;  //the smaller the dt, the more accurate
 
-    ff = 1;
+    ff = 1; //Command to fastforward
 }
 const reloadScreen = () => {
-    location.reload();
+    location.reload(); //reloads page when you press new
 }
 const speedUp = () => {
     // timeDelay = 1;
-    dt = std_dt*1.5;
+    dt = std_dt*1.5;  //this is what makes it speed up. however, this is unstable
 }
 const slowDown = () => {
     // timeDelay = 100;
@@ -159,7 +169,7 @@ const lorentz = () =>{
     x=-7.13;
     y=-7.11;
     z=25.41;
-    std_dt = 0.005;
+    std_dt = 0.001;
     dt = std_dt;
     normalizeX = (x) =>{
         return (window.innerWidth/2 + 30*scaleFactor*x);
@@ -177,7 +187,7 @@ const chen = () => {
     x=1.960;
     y=2.04;
     z=12.51;
-    std_dt = 0.0005;
+    std_dt = 0.0004;
     dt = std_dt;
     unitVel = 1500;
     
