@@ -6,6 +6,7 @@ var timeDelay = 1; //How quickly it draws lines
 
 // Getting html5 canvas ready 
 var canvas = document.getElementById('firstCanvas');
+console.log(canvas);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 console.log(canvas.height, canvas.width);
@@ -15,7 +16,7 @@ c.lineWidth= 1;
 
 
 
-// The beloe line is what resizes the graph to fit screensize in all devices.
+// The below line is what resizes the graph to fit screensize in all devices.
 var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
 
 
@@ -46,7 +47,7 @@ const clearScreen = () => {
     c.clearRect(0, 0, canvas.width, canvas.height);
 }
 const ffBut = () => {
-    dt = std_dt/5;  //the smaller the dt, the more accurate
+    dt = std_dt/2;  //the smaller the dt, the more accurate
 
     ff = 1; //Command to fastforward
 }
@@ -169,7 +170,7 @@ const lorentz = () =>{
     x=-7.13;
     y=-7.11;
     z=25.41;
-    std_dt = 0.001;
+    std_dt = 0.003;
     dt = std_dt;
     normalizeX = (x) =>{
         return (window.innerWidth/2 + 30*scaleFactor*x);
@@ -202,6 +203,6 @@ const chen = () => {
     dxdt=(x,y,z) => {return 400*(y-x);}
     dydt=(x,y,z)=> {return -120*x-10*(x*z) +280*y ;}
     dzdt=(x,y,z) => {return 10*x*y  - 30*z;}
-    proceed(Math.round(600000*(scaleFactor**0.2)));
+    proceed(Math.round(200000*(scaleFactor**0.2)));
 
 }
