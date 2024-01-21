@@ -7,7 +7,7 @@ In order to speed up or slow down the pen, click the respective buttons.
 Note, speeding up requires a sacrifise on computational accuracy and may lead to instabilities. 
 Note: fast forward is not stoppable and unpredictable. Once used, it cannot be undone using slow down or normal. In order to change, click 'new'. Differnt browser/devcices will lead to different performances in fast forward.
 
-Clear: clears screen but doesn't reset position
+Clear: clears screen but doesn't reset position \n
 New: Reset's position
 
 
