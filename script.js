@@ -45,7 +45,7 @@ const reloadScreen = () => {
 }
 const speedUp = () => {
     // timeDelay = 1;
-    dt = std_dt*2;
+    dt = std_dt*1.5;
 }
 const slowDown = () => {
     // timeDelay = 100;
