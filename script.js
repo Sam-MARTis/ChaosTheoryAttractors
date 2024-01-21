@@ -1,6 +1,6 @@
 
 
-var unitVel = 100;
+var unitVel = 100; 
 var butPushed = 0;
 var canvas = document.getElementById('firstCanvas');
 canvas.width = window.innerWidth;
