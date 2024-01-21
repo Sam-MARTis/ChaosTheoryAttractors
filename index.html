@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas</title>
+    <title>Chaos Plotter</title>
     <style>
         canvas{
             border: 1px solid black;
@@ -23,7 +23,10 @@
 </head>
 <body>
     <div>
-        <button type="button" onclick="butClick()">Speed up</button>
+        <button type="button" onclick="ffBut()">Fast Forward</button>
+        <button type="button" onclick="speedUp()">Speed up</button>
+        <button type="button" onclick="normalSpeed()">Normal</button>
+        <button type="button" onclick="slowDown()">Slow down</button>
         <button type="button" onclick="clearScreen()">Clear </button>
         <button type="button" onclick="reloadScreen()">New</button>
         <span> Attractors: </span>
@@ -36,4 +39,4 @@
     </canvas>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
