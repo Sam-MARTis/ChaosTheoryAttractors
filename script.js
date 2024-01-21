@@ -13,14 +13,14 @@ c.lineWidth= 1;
 var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
 
 var count = 0;
-var x=-7.13
-var y=-7.11
-var z=25.41
+var x=-7.13;
+var y=-7.11;
+var z=25.41;
 var b = 0;
 var g = 0;
 var r = 0;
 var dt = 0.005;
-a = Promise.resolve()
+a = Promise.resolve();
 
 
 
@@ -70,9 +70,9 @@ c.moveTo(window.innerWidth/2,window.innerHeight/2);
 var prev_pos = {x:normalizeX(y), y:normalizeY(z)};
 const move = (x, y, col) => {
     if(count=1){
-        c.beginPath()
+        c.beginPath();
         c.strokeStyle = `rgb(${col.r}, 0, ${col.b})`;
-        count =0
+        count =0;
     }
     else{
         count = 1;
@@ -146,15 +146,15 @@ const lorentz = () =>{
     z=25.41;
     dt = 0.005;
     normalizeX = (x) =>{
-        return (window.innerWidth/2 + 30*scaleFactor*x)
+        return (window.innerWidth/2 + 30*scaleFactor*x);
     }
     normalizeY = (y) =>{
-        return (window.innerHeight/2 - 18*scaleFactor*(y-30*scaleFactor))
+        return (window.innerHeight/2 - 18*scaleFactor*(y-30*scaleFactor));
     }
     prev_pos = {x:normalizeX(y), y:normalizeY(z)};
-    dxdt=(x,y,z) => {return 10*(y-x)}
-    dydt=(x,y,z)=> {return x*(28-z)-y}
-    dzdt=(x,y,z) => {return x*y-8*z/3}
+    dxdt=(x,y,z) => {return 10*(y-x);}
+    dydt=(x,y,z)=> {return x*(28-z)-y;}
+    dzdt=(x,y,z) => {return x*y-8*z/3;}
     proceed(Math.round(100000*(scaleFactor**0.2)));
 }
 const chen = () => {
@@ -166,15 +166,15 @@ const chen = () => {
     
     
     normalizeX = (x) =>{
-        return (window.innerWidth/2 + 20*scaleFactor*x)
+        return (window.innerWidth/2 + 20*scaleFactor*x);
     }
     normalizeY = (y) =>{
-        return (window.innerHeight/2 - 20*scaleFactor*(y-20*scaleFactor))
+        return (window.innerHeight/2 - 20*scaleFactor*(y-20*scaleFactor));
     }
     prev_pos = {x:normalizeX(y), y:normalizeY(z)};
-    dxdt=(x,y,z) => {return 400*(y-x)}
-    dydt=(x,y,z)=> {return -120*x-10*(x*z) +280*y}
-    dzdt=(x,y,z) => {return 10*x*y  - 30*z}
+    dxdt=(x,y,z) => {return 400*(y-x);}
+    dydt=(x,y,z)=> {return -120*x-10*(x*z) +280*y ;}
+    dzdt=(x,y,z) => {return 10*x*y  - 30*z;}
     proceed(Math.round(100000*(scaleFactor**0.2)));
 
 }
