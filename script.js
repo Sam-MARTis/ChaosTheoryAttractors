@@ -12,7 +12,7 @@ var c = canvas.getContext('2d');
 c.strokeStyle = 'rgb(200, 0,0)';
 c.lineWidth= 1;
 var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
-var std_dt = 0.005
+var std_dt = 0.005;
 var count = 0;
 var x=-7.13;
 var y=-7.11;
@@ -159,7 +159,7 @@ const lorentz = () =>{
     x=-7.13;
     y=-7.11;
     z=25.41;
-    std_dt = 0.005
+    std_dt = 0.005;
     dt = std_dt;
     normalizeX = (x) =>{
         return (window.innerWidth/2 + 30*scaleFactor*x);
@@ -177,7 +177,7 @@ const chen = () => {
     x=1.960;
     y=2.04;
     z=12.51;
-    std_dt = 0.0005
+    std_dt = 0.0005;
     dt = std_dt;
     unitVel = 1500;
     
