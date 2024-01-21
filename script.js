@@ -97,11 +97,13 @@ const move = (x, y, col) => {
     if(count=1){
         c.beginPath();
         c.strokeStyle = `rgb(${col.r}, 0, ${col.b})`;
+        // c.strokeStyle = `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)})`;
         count =0;
     }
     else{
         count = 1;
     }
+    // console.log(x, y, z);
     c.moveTo(prev_pos.x, prev_pos.y);
     
     c.lineTo(x, y);
@@ -126,7 +128,7 @@ var dzdt=(x,y,z) => {return 0;}
 
 
 //Main function
-const proceed = (k) => {
+const proceed = (k, num) => {
     for(let i=0; i<k; i++){
         if(endMove ==1){
                 endMove = 0;
@@ -136,9 +138,14 @@ const proceed = (k) => {
         
         a = a.then(
                 () => {
-                    
-                    command(move, normalizeX(x), normalizeY(z), {r:r, g:g, b:b});
+                    if(num == 0){
+                        command(move, normalizeX(x), normalizeY(z), {r:r, g:g, b:b});
+                    }
+                    else{
+                        command(move,normalizeX(y)*1.86 - normalizeX(x)*0.86, normalizeY(z), {r:r, g:g, b:b});
+                    }
                 }
+
             )
             .then(
                 () => {
@@ -154,7 +161,7 @@ const proceed = (k) => {
                             let vel = ((dfxdt**2 + dfydt**2 + dfzdt**2)**0.5)/unitVel;
                             r = Math.round(240*vel);
                             b = Math.round(240* (1.5-vel));
-                            
+                              
                             
                             // x + dx <==> x + dxdt *dt
                             x = x+(dfxdt*dt);
@@ -202,7 +209,7 @@ const lorenz = () =>{
     dydt=(x,y,z)=> {return x*(28-z)-y;}
     dzdt=(x,y,z) => {return x*y-8*z/3;}
 
-    proceed(Math.round(600000*(scaleFactor**0.2))); //Calls the main function with above delcared conditions.
+    proceed(Math.round(600000*(scaleFactor**0.2)), 0); //Calls the main function with above delcared conditions.
 }
 const chen = () => {
     //Starting positions for chen attractor
@@ -222,7 +229,7 @@ const chen = () => {
     normalizeY = (y) =>{
         return (window.innerHeight/2 - 20*scaleFactor*(y-20*scaleFactor));
     }
-    prev_pos = {x:normalizeX(y), y:normalizeY(z)};
+    prev_pos = {x:normalizeX(x), y:normalizeY(z)};
 
     //Differential equations for chen attractor
     dxdt=(x,y,z) => {return 400*(y-x);}
@@ -230,10 +237,37 @@ const chen = () => {
     dzdt=(x,y,z) => {return 10*x*y  - 30*z;}
 
 
-    proceed(Math.round(200000*(scaleFactor**0.2))); //Calls the main function with above delcared conditions.
+    proceed(Math.round(200000*(scaleFactor**0.2)), 0); //Calls the main function with above delcared conditions.
 
 }
+const halvorsen = () => {
+    // x= -5.48;
+    // y= -4.51;
+    // z= 1.04;
+    x = -1.48;
+    y = -1.51;
+    z = 2.04;
 
+
+    std_dt = 0.001; //Chen attractor is more sensitive
+    dt = std_dt;
+    unitVel = 60;
+
+    normalizeX = (t) =>{
+        return (window.innerWidth/(2*1.36) + 10*scaleFactor*(t+20));
+    }
+    normalizeY = (t) =>{
+        return (window.innerHeight/(2*1.36) - 20*scaleFactor*(t));
+    }
+    prev_pos = {x:normalizeX(y), y:normalizeY(z)};
+
+    let alpha = 1.4;
+    dxdt=(x,y,z) => {return -(alpha*x) - (4*y) - (4*z) - (y**2);}
+    dydt=(x,y,z)=> {return -(alpha*y) - (4*z) - (4*x) - (z**2);}
+    dzdt=(x,y,z) => {return -(alpha*z) - (4*x) - (4*y) - (x**2);}
+
+    proceed(Math.round(800000*(scaleFactor**0.2)), 1);
+}
 //Controls functionality of buttons
 
 
@@ -245,3 +279,4 @@ document.getElementById('but5').addEventListener('click', clearScreen);
 document.getElementById('but6').addEventListener('click', reloadScreen);
 document.getElementById('but7').addEventListener('click', chen);
 document.getElementById('but8').addEventListener('click', lorenz);
+document.getElementById('but9').addEventListener('click', halvorsen);
