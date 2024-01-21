@@ -174,7 +174,7 @@ for(let i=0; i<k; i++){
 }
 }
 // proceed();
-const lorentz = () =>{
+const lorenz = () =>{
     unitVel = 100;
     x=-7.13;
     y=-7.11;
@@ -224,4 +224,4 @@ document.getElementById('but4').addEventListener('click', slowDown);
 document.getElementById('but5').addEventListener('click', clearScreen);
 document.getElementById('but6').addEventListener('click', reloadScreen);
 document.getElementById('but7').addEventListener('click', chen);
-document.getElementById('but8').addEventListener('click', lorentz);
+document.getElementById('but8').addEventListener('click', lorenz);

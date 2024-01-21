@@ -16,3 +16,18 @@ Clear: clears screen but doesn't reset position
 New: Reset's position
 
 
+
+You can expect to see these two images if everything runs smoothly:
+
+Lorentz Attractor:
+<img src='./images/LorenzAttractor.png>'>
+
+Read more about Lorenz Attractor <a href="https://en.wikipedia.org/wiki/Lorenz_system">here</a>
+
+
+
+Chen Attractor:
+<img src='./images/ChenAttractor.png>'>
+
+Read more about Chen Attractor <a href="https://en.wikipedia.org/wiki/Multiscroll_attractor">here</a>
+
