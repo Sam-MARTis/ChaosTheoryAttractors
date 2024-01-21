@@ -1,7 +1,8 @@
 
 
 var unitVel = 100; 
-var butPushed = 0;
+var ff = 0;
+var timeDelay = 1;
 var canvas = document.getElementById('firstCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -11,7 +12,7 @@ var c = canvas.getContext('2d');
 c.strokeStyle = 'rgb(200, 0,0)';
 c.lineWidth= 1;
 var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
-
+var std_dt = 0.005
 var count = 0;
 var x=-7.13;
 var y=-7.11;
@@ -34,13 +35,26 @@ a = Promise.resolve();
 const clearScreen = () => {
     c.clearRect(0, 0, canvas.width, canvas.height);
 }
-const butClick = () => {
-    butPushed = 1;
+const ffBut = () => {
+    dt = std_dt/5;
+
+    ff = 1;
 }
 const reloadScreen = () => {
     location.reload();
 }
-
+const speedUp = () => {
+    // timeDelay = 1;
+    dt = std_dt*2;
+}
+const slowDown = () => {
+    // timeDelay = 100;
+    dt = std_dt / 5;
+}
+const normalSpeed = () => {
+    // timeDelay = 10;
+    dt = std_dt;
+}
 
 var normalizeX = (x) =>{
     return 0;
@@ -124,11 +138,12 @@ for(let i=0; i<k; i++){
                         x = x+(dfxdt*dt);
                         y = y+(dfydt*dt);
                         z = z+(dfzdt*dt);
-                    if(butPushed == 1){
+                    if(ff == 1){
                         resolve();
                     }
                     else{
-                    setTimeout(resolve,1);
+                    console.log(timeDelay);
+                    setTimeout(resolve, timeDelay);
                     }
                     
                     }   
@@ -144,7 +159,8 @@ const lorentz = () =>{
     x=-7.13;
     y=-7.11;
     z=25.41;
-    dt = 0.005;
+    std_dt = 0.005
+    dt = std_dt;
     normalizeX = (x) =>{
         return (window.innerWidth/2 + 30*scaleFactor*x);
     }
@@ -155,13 +171,14 @@ const lorentz = () =>{
     dxdt=(x,y,z) => {return 10*(y-x);}
     dydt=(x,y,z)=> {return x*(28-z)-y;}
     dzdt=(x,y,z) => {return x*y-8*z/3;}
-    proceed(Math.round(100000*(scaleFactor**0.2)));
+    proceed(Math.round(600000*(scaleFactor**0.2)));
 }
 const chen = () => {
     x=1.960;
     y=2.04;
     z=12.51;
-    dt = 0.0005;
+    std_dt = 0.0005
+    dt = std_dt;
     unitVel = 1500;
     
     
@@ -175,6 +192,6 @@ const chen = () => {
     dxdt=(x,y,z) => {return 400*(y-x);}
     dydt=(x,y,z)=> {return -120*x-10*(x*z) +280*y ;}
     dzdt=(x,y,z) => {return 10*x*y  - 30*z;}
-    proceed(Math.round(100000*(scaleFactor**0.2)));
+    proceed(Math.round(600000*(scaleFactor**0.2)));
 
 }
