@@ -264,7 +264,7 @@ const halvorsen = () => {
     dydt=(x,y,z)=> {return -(alpha*y) - (4*z) - (4*x) - (z**2);}
     dzdt=(x,y,z) => {return -(alpha*z) - (4*x) - (4*y) - (x**2);}
 
-    proceed(Math.round(800000*(scaleFactor**0.2)));
+    proceed(Math.round(900000*(scaleFactor**0.2)));
 }
 //Controls functionality of buttons
 
