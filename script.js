@@ -132,7 +132,7 @@ const proceed = (k, num) => {
     for(let i=0; i<k; i++){
         if(endMove ==1){
                 endMove = 0;
-                move(0,0)
+                move(0,0);
                 break;
             }
         
@@ -142,7 +142,7 @@ const proceed = (k, num) => {
                         command(move, normalizeX(x), normalizeY(z), {r:r, g:g, b:b});
                     }
                     else{
-                        command(move,normalizeX(y)*1.86 - normalizeX(x)*0.86, normalizeY(z), {r:r, g:g, b:b});
+                        command(move,(normalizeX(y)*1.86 - normalizeX(x)*0.86), normalizeY(z), {r:r, g:g, b:b});
                     }
                 }
 
