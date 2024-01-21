@@ -1,16 +1,16 @@
 
 
-
-
-
+var unitVel = 100;
 var butPushed = 0;
 var canvas = document.getElementById('firstCanvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-canvas.height = 1000 * devicePixelRatio;
+// canvas.height = 1000 * devicePixelRatio;
+console.log(canvas.height, canvas.width);
 var c = canvas.getContext('2d');
 c.strokeStyle = 'rgb(200, 0,0)';
 c.lineWidth= 1;
+var scaleFactor = Math.min(canvas.height/968, canvas.width/1260);
 
 var count = 0;
 var x=-7.13
@@ -42,11 +42,11 @@ const reloadScreen = () => {
 }
 
 
-const normalizeX = (x) =>{
-    return (window.innerWidth/2 + 30*x)
+var normalizeX = (x) =>{
+    return 0;
 }
-const normalizeY = (y) =>{
-    return (window.innerHeight/2 - 18*(y-25))
+var normalizeY = (y) =>{
+    return 0;
 }
 
 c.beginPath();
@@ -94,26 +94,17 @@ const move = (x, y, col) => {
 
 // c.moveTo(normalizeX(y), normalizeY(z));
 
-const dxdt=(x,y,z) => {return 10*(y-x)}
-const dydt=(x,y,z)=> {return x*(28-z)-y}
-const dzdt=(x,y,z) => {return x*y-8*z/3}
+var dxdt=(x,y,z) => {return 0;}
+var dydt=(x,y,z)=> {return 0;}
+var dzdt=(x,y,z) => {return 0;}
 
-const a11 = 0.6911211, a12 = 0.5110536, a13 = -0.5110536;
-const a21 = -0.5110536, a22 = 0.8455606, a23 = 0.1544394;
-const a31 = 0.5110536, a32 = 0.1544394, a33 = 0.8455606;
-
-const rotate = (x, y, z) => {
-    const newX = a11 * x + a12 * y + a13 * z;
-    const newY = a21 * x + a22 * y + a23 * z;
-    const newZ = a31 * x + a32 * y + a33 * z;
-    return {x:x, y:y, z:z}
-};
-for(let i=0; i<100000; i++){
+const proceed = (k) => {
+for(let i=0; i<k; i++){
     
     a = a.then(
             () => {
-                rotatedAxes = rotate(x,y,z);
-                command(move, normalizeX(rotatedAxes.x), normalizeY(rotatedAxes.z), {r:r, g:g, b:b});
+                
+                command(move, normalizeX(x), normalizeY(z), {r:r, g:g, b:b});
             }
         )
         .then(
@@ -124,7 +115,7 @@ for(let i=0; i<100000; i++){
                         var dfxdt = dxdt(x, y, z);
                         var dfydt = dydt(x, y, z);
                         var dfzdt = dzdt(x, y, z);
-                        let vel = ((dfxdt**2 + dfydt**2 + dfzdt**2)**0.5)/100;
+                        let vel = ((dfxdt**2 + dfydt**2 + dfzdt**2)**0.5)/unitVel;
                         r = Math.round(240*vel);
                         b = Math.round(240* (1.5-vel));
                         c.strokeStyle = `rgb(${r}, 0, ${b})`;
@@ -146,4 +137,44 @@ for(let i=0; i<100000; i++){
         );
     
 }
+}
+// proceed();
+const lorentz = () =>{
+    unitVel = 100;
+    x=-7.13;
+    y=-7.11;
+    z=25.41;
+    dt = 0.005;
+    normalizeX = (x) =>{
+        return (window.innerWidth/2 + 30*scaleFactor*x)
+    }
+    normalizeY = (y) =>{
+        return (window.innerHeight/2 - 18*scaleFactor*(y-30*scaleFactor))
+    }
+    prev_pos = {x:normalizeX(y), y:normalizeY(z)};
+    dxdt=(x,y,z) => {return 10*(y-x)}
+    dydt=(x,y,z)=> {return x*(28-z)-y}
+    dzdt=(x,y,z) => {return x*y-8*z/3}
+    proceed(Math.round(100000*(scaleFactor**0.2)));
+}
+const chen = () => {
+    x=1.960;
+    y=2.04;
+    z=12.51;
+    dt = 0.0005;
+    unitVel = 1500;
+    
+    
+    normalizeX = (x) =>{
+        return (window.innerWidth/2 + 20*scaleFactor*x)
+    }
+    normalizeY = (y) =>{
+        return (window.innerHeight/2 - 20*scaleFactor*(y-20*scaleFactor))
+    }
+    prev_pos = {x:normalizeX(y), y:normalizeY(z)};
+    dxdt=(x,y,z) => {return 400*(y-x)}
+    dydt=(x,y,z)=> {return -120*x-10*(x*z) +280*y}
+    dzdt=(x,y,z) => {return 10*x*y  - 30*z}
+    proceed(Math.round(100000*(scaleFactor**0.2)));
 
+}
